@@ -103,4 +103,4 @@ OUTDIR=/path/to/output_dir
 ${PIPELINE}/getConsensus.py -kv /path/to/keyValue.csv -rd ${READS} -fd ${REFRENCES} -o ${OUTDIR} -af /path/to/adapters.fa -j ${SLURM_CPUS_PER_TASK}
 ```
 
-The the above contents into a file called `geneCapture_submission.sh`, or something similar.
+Copy the above contents into a file called `geneCapture_submission.sh`, or something similar.
