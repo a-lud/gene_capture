@@ -2,6 +2,8 @@
 
 This is a simple pipeline that aligns gene capture data to a transcriptome reference file (Trinity), generating a consensus 'gene sequence' at the other end.
 
+![Flow diagram of the pipeline stages.](data/geneCapture_flow.svg)
+
 ## Installing the pipeline
 
 To install the pipeline, log into Phoenix and run the following
