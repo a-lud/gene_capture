@@ -2,6 +2,14 @@
 
 This is a simple pipeline that aligns gene capture data to a transcriptome reference file (Trinity), generating a consensus 'gene sequence' at the other end.
 
+## Installing the pipeline
+
+To install the pipeline, log into Phoenix and run the following
+
+`$ git clone git@github.com:a-lud/gene_capture.git`
+
+This will download this repository into the directory where you execute this code. I recommend making a `tools` directory or something similar in your fast directory on Phoenix.
+
 ## Requirements
 
 This pipeline requires Python and a few of its libraries. I've included an example of how to install this pipeline in a contained environment below with all required software.
@@ -22,7 +30,9 @@ If all the software installs correctly, you should be met with a message demonst
 
 ## The pipeline: getConsensus.py
 
-The pipeline has the following arguments:
+The pipeline has the script `getConsensus.py` which is the main script. There is also an accessory script `bwa_align.sh` which is called within the `getConsensus.py`, meaning you don't need to worry about it.
+
+The script `getConsensus.py` has the following arguments:
 
 **Key-value file (-kv)**: This is a two columned CSV file that has the columns `sample` and `reference`. For each sample, match it to a **unique** basename of the reference it belongs to. Do not provide the file extension.
     -kv /path/to/key_value.csv
