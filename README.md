@@ -104,3 +104,6 @@ ${PIPELINE}/getConsensus.py -kv /path/to/keyValue.csv -rd ${READS} -fd ${REFRENC
 ```
 
 Copy the above contents into a file called `geneCapture_submission.sh`, or something similar.
+
+This would then be executed from Phoenix's head node using the command `$ sbatch geneCapture_submission.sh`, which
+would submit the job to the Phoenix execution queue.
