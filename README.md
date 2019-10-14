@@ -12,6 +12,8 @@ $ conda create -n geneCapture_env argparse pandas mosdepth trimmomatic bwa fastq
 $ conda activate geneCapture_env
 ```
 
+If all the software installs correctly, you should be met with a message demonstrating how to activate the conda environment. See the section `Running the pipeline on Phoenix` below to see how to run the pipeline.
+
 **NOTE**: MosDepth is only available on Linux systems! It will not install on Mac.
 
 ## The pipeline: getConsensus.py
