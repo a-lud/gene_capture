@@ -85,8 +85,8 @@ Once you've created your conda environment with all the required software, you n
 #SBATCH -c 8
 #SBATCH --time=8:00:00
 #SBATCH --mem=16GB
-#SBATCH -o /home/a1645424/fastdir/path/to/geneCapture_slurm/%x_%j.out
-#SBATCH -e /home/a1645424/fastdir/path/to/geneCapture_slurm/%x_%j.err
+#SBATCH -o /home/a123456/fastdir/path/to/geneCapture_slurm/%x_%j.out
+#SBATCH -e /home/a123456/fastdir/path/to/geneCapture_slurm/%x_%j.err
 #SBATCH --mail-type=END
 #SBATCH --mail-type=FAIL
 #SBATCH --mail-user=firstName.lastName@adelaide.edu.au
