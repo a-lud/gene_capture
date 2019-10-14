@@ -6,6 +6,8 @@ This is a simple pipeline that aligns gene capture data to a transcriptome refer
 
 This pipeline requires Python and a few of its libraries. I've included an example of how to install this pipeline in a contained environment below with all required software.
 
+Run the following on the head node of Phoenix.
+
 ```
 $ module load Anaconda3/5.0.1
 $ conda create -n geneCapture_env argparse pandas mosdepth trimmomatic bwa fastqc
