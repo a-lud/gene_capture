@@ -9,6 +9,8 @@ This pipeline requires Python and a few of its libraries. I've included an examp
 ```
 $ module load Anaconda3/5.0.1
 $ conda create -n geneCapture_env argparse pandas mosdepth trimmomatic bwa fastqc
+
+## Can activate the environment using the command below
 $ conda activate geneCapture_env
 ```
 
