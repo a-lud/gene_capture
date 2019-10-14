@@ -21,7 +21,7 @@ bwa mem -B 2 -M -t ${7} ${1} ${2} ${3} | samtools view -b -@ ${7} -o ${4} > ${4}
 
 ## Statistics on bam
 samtools flagstat -@ ${7} ${4} > ${5}
-# echo "mosdepth -t ${7} $(dirname ${4})/$(basename ${5} .flagstat) ${4}"
+mosdepth -t ${7} $(dirname ${4})/$(basename ${5} .flagstat) ${4}
 
 ## Filtering raw alignments
 samtools view -b -@ ${7} -F 4 ${4} |
