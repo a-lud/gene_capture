@@ -62,7 +62,7 @@ The script `getConsensus.py` has the following arguments:
 Below is the full help page
 
 ```
-(CODEML_env) [13:08:06] alastairludington:gene_capture $ ./getConsensus.py -h
+$ ./getConsensus.py -h
 usage: getConsensus.py [-h] -kv KEYVALUEPATH -rd READSDIR [-fd REFDIR] -o
                        OUTPUTDIR -af ADAPTERFILE [-j THREADS]
 
