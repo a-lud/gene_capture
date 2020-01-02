@@ -126,7 +126,9 @@ def getConsensus(readsList, outDir):
     consensus = out + '/' + readsList[2] + '.fasta'
 
     ## Calling genotypes
-    bcf_call = "bcftools mpileup -Ou -d 5000 -Q 20 -q 20 -f '%s' '%s' | bcftools call -mv -Oz -o '%s'" % (reference, bam, vcf)
+    bcf_call = "bcftools mpileup -Ou -d 5000 -Q 20 -q 20 -f '%s' '%s' | \
+        bcftools call -c - | \
+        bcftools norm -m-any -Oz -o '%s'" % (reference, bam, vcf)
     os.system(bcf_call) ## Calling genotypes
     subprocess.call(['bcftools', 'index', vcf],
                     subprocess.DEVNULL)  # Indexing vcf file
