@@ -48,6 +48,12 @@ def runFastQC(readsList, outDir, rawTrim, threads):
     if not os.path.exists(out):
         os.makedirs(out, exist_ok=True)
 
+    ## Check if output exists in directory + isn't empty
+    chk = checkOutputExists(out, 'html', readsList)
+    if chk != 0:
+        print(chk)
+        return
+
     ## Raw or trimmed data - conditional
     if rawTrim == 'raw':
         ## Raw data
@@ -75,6 +81,12 @@ def runTrimmomatic(readsList, outDir, adapterFile, threads):
     out = outDir + '/trimmomatic'
     if not os.path.exists(out):
         os.makedirs(out, exist_ok=True)
+
+    ## Check if output exists in directory + isn't empty
+    chk = checkOutputExists(out, 'summary', readsList)
+    if chk != 0:
+        print(chk)
+        return
 
     ## Building read input/outputs
     R1 = readsList[0][0]
@@ -106,6 +118,12 @@ def runBWAmem(readsList, outDir, threads, scriptDir):
     if not os.path.exists(outFILT):
         os.makedirs(outFILT, exist_ok=True)
 
+    ## Check if output exists in directory + isn't empty
+    chk = checkOutputExists(outFILT, 'bam', readsList)
+    if chk != 0:
+        print(chk)
+        return
+
     ## List trimmed files for alignment
     f = sorted(glob.glob(outDir + '/trimmomatic' + '/' + readsList[2] + '*' + '.P.qtrim.fastq.gz'))
     
@@ -130,6 +148,12 @@ def getConsensus(readsList, outDir):
     out = outDir + '/consensus'
     if not os.path.exists(out):
         os.makedirs(out, exist_ok=True)
+
+    ## Check if output exists in directory + isn't empty
+    chk = checkOutputExists(out, 'fasta', readsList)
+    if chk != 0:
+        print(chk)
+        return
 
     ## Inputs/outputs
     reference = ''.join(readsList[1])
