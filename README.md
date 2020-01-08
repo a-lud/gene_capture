@@ -116,7 +116,13 @@ REFERENCES=/path/to/references
 OUTDIR=/path/to/output_dir
 
 ## Running the pipeline
-${PIPELINE}/getConsensus.py -kv /path/to/keyValue.csv -rd ${READS} -fd ${REFRENCES} -o ${OUTDIR} -af /path/to/adapters.fa -j ${SLURM_CPUS_PER_TASK}
+${PIPELINE}/getConsensus.py \
+-kv /path/to/keyValue.csv \
+-rd ${READS} \
+-fd ${REFRENCES} \
+-o ${OUTDIR} \
+-af /path/to/adapters.fa \
+-j ${SLURM_CPUS_PER_TASK}
 ```
 
 Copy the above contents into a file called `geneCapture_submission.sh`, or something similar.
