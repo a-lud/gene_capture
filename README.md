@@ -20,7 +20,7 @@ Run the following on the head node of Phoenix.
 
 ```
 $ module load Anaconda3/5.0.1
-$ conda create -n geneCapture_env argparse pandas mosdepth trimmomatic bwa fastqc
+$ conda create -n geneCapture_env argparse pandas mosdepth trimmomatic bwa fastqc samtools bcftools
 
 ## Can activate the environment using the command below
 $ conda activate geneCapture_env
