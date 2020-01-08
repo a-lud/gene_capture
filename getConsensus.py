@@ -6,6 +6,19 @@ import argparse
 import subprocess
 import pandas as pd
 
+def checkOutputExists(outPath, ext, readsList):
+    
+    ## List sample specific outputs
+    b = os.path.basename(readsList[0][0])
+    b = b.replace('_L001_R1.fastq.gz', '')
+    chk = glob.glob(outPath + '/' + b + '*' + ext)
+    
+    ## If files exist and have size > 0 --> skip
+    if len(chk) > 0 and os.path.exists(chk[0]) and os.path.getsize(chk[0]) > 0:
+        return "Skipping: Output exists for" + ' ' + b
+    else:
+        return 0
+
 def getSeqData(keyValuePath, readsPath, refPath):
 
     ## Importing key-value
