@@ -165,14 +165,14 @@ def getConsensus(readsList, outDir):
     ## Calling genotypes
     bcf_call = "bcftools mpileup -Ou -d 5000 -Q 20 -q 20 -f '%s' '%s' | \
         bcftools call -c - | \
-        bcftools norm -m-any -Oz -o '%s'" % (reference, bam, vcf)
+        bcftools norm -f '%s' -m +any -Oz -o '%s'" % (reference, bam, reference, vcf)
     os.system(bcf_call) ## Calling genotypes
     subprocess.call(['bcftools', 'index', vcf],
                     subprocess.DEVNULL)  # Indexing vcf file
 
     ## Calling consensus using VCF
     subprocess.call(['bcftools', 'consensus', '-f',
-                     reference, '-o', consensus, vcf], subprocess.DEVNULL)
+                     reference, '-H', '1', '-o', consensus, vcf], subprocess.DEVNULL)
 
 
 if __name__ == "__main__":
