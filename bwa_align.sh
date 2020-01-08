@@ -17,7 +17,11 @@ if [[ ! -f $(dirname ${1})/$(basename ${1} ]).bwt ]]; then
 fi
 
 ## Align reads
-bwa mem -B 2 -M -t ${7} ${1} ${2} ${3} | samtools view -b -@ ${7} -o ${4} > ${4}
+bwa mem -B 2 -M -t ${7} ${1} ${2} ${3} | \
+samtools sort -@ ${7} -O BAM -o ${4}
+
+## Index all alignment file
+samtools index -@ ${7} ${4}
 
 ## Statistics on bam
 samtools flagstat -@ ${7} ${4} > ${5}
