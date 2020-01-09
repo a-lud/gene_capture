@@ -8,7 +8,7 @@ This is a simple pipeline that aligns gene capture data to a transcriptome refer
 
 To install the pipeline, log into Phoenix and run the following
 
-`$ git clone git@github.com:a-lud/gene_capture.git`
+`$ git clone https://github.com/a-lud/gene_capture.git`
 
 This will download this repository into the directory where you execute this code. I recommend making a `tools` directory or something similar in your fast directory on Phoenix.
 
