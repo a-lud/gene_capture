@@ -115,6 +115,8 @@ READS=/path/to/reads
 REFERENCES=/path/to/references
 OUTDIR=/path/to/output_dir
 
+conda activate geneCapture_env
+
 ## Running the pipeline
 ${PIPELINE}/getConsensus.py \
 -kv /path/to/keyValue.csv \
@@ -123,6 +125,8 @@ ${PIPELINE}/getConsensus.py \
 -o ${OUTDIR} \
 -af /path/to/adapters.fa \
 -j ${SLURM_CPUS_PER_TASK}
+
+conda deactivate
 ```
 
 Copy the above contents into a file called `geneCapture_submission.sh`, or something similar.
