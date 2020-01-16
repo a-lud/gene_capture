@@ -144,7 +144,7 @@ Reads are trimmed before alignment using the Trimmomatic software. The software 
 
 Sliding window trimming (`SLIDINGWINDOW`) is performed with a window size of 4bp. From the 5' end of the read, the software clips reads if the windows average quality drops below a quality threshold. Here, the quality threshold is set ot 5.
 
-Bases at the begnning and ends of reads are also trimmed if they fall below a quality threshold (`LEADING` and `TRAILING` each set to 5).
+Bases at the begnning and ends of reads are also trimmed if they fall below a quality threshold (`LEADING:5` and `TRAILING:5`).
 
 Finally, reads are filtered if their length falls below a minimum length of 25bp (`MINLEN:25`).
 
