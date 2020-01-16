@@ -150,7 +150,7 @@ Finally, reads are filtered if their length falls below a minimum length of 25bp
 
 #### Alignment to reference
 
-Alignment is carreied out by the software `BWA mem`. The gap penalty was changed from 4 to 2 (`-B 2`), while short, split hits were marked as secondary (`-M`). Alignment files were then sorted and filtered for unmapped reads (`flagsts = 4`) using `SAMtools`.
+Alignment is carreied out by the software `BWA mem`. The gap penalty was changed from 4 to 2 (`-B 2`), while short, split hits were marked as secondary (`-M`). Alignment files were then sorted and filtered for unmapped reads (`flagstat = 4`) using `SAMtools`.
 
 #### Genotype and SNP calling
 
