@@ -164,7 +164,7 @@ The figure below demonstrates the process of normalisation on a tandem repeat de
 
 ![Credit: 10.1093/bioinformatics/btv112](data/normalisation.png)
 
-SNPs and indels were also merged into a single record using the parameter `+any` during the normalisation process. This is done to collapse overallping SNPs and indels to prevent coordinates shifting when calling the consensus sequence.
+SNPs and indels were also merged into a single record using the parameter `+any` during the normalisation process. This is done to collapse overlapping SNPs and indels to prevent coordinates shifting when calling the consensus sequence.
 
 #### Consensus calling
 
