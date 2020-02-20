@@ -105,8 +105,10 @@ def runTrimmomatic(readsList, outDir, adapterFile, threads):
     summary = out + '/' + readsList[2] + '.summary'
 
     ## Calling Trimmomatic
-    subprocess.call(['trimmomatic', 'PE', '-threads',
-                     str(threads), '-trimlog', log, '-summary', summary, R1, R2, R1_out, R1_unpaired, R2_out, R2_unpaired, ic, 'SLIDINGWINDOW:4:5', 'LEADING:5', 'TRAILING:5', 'MINLEN:25'], subprocess.DEVNULL)
+    subprocess.run(['trimmomatic', 'PE', '-threads', str(threads), 
+                    '-trimlog', log, '-summary', summary, R1, R2, 
+                    R1_out, R1_unpaired, R2_out, R2_unpaired, ic, 'SLIDINGWINDOW:4:5', 'LEADING:5', 'TRAILING:5', 'MINLEN:25'], 
+                    stderr=subprocess.DEVNULL, stdout=subprocess.DEVNULL)
 
 
 def runBWAmem(readsList, outDir, threads, scriptDir):
@@ -136,13 +138,11 @@ def runBWAmem(readsList, outDir, threads, scriptDir):
     outBAM = outRAW + '/' + readsList[2] + '.bam'
     outBAM_stats = outRAW + '/' + readsList[2] + '.flagstat'
     outBAMFILT = outFILT + '/' + readsList[2] + '_filtered_sorted.bam'
+    script = scriptDir + "/bwa_align.sh"
 
-    ## Command to run BWA script
-    bwa_call = scriptDir + "/bwa_align.sh '%s' '%s' '%s' '%s' '%s' '%s' '%s' " % (
-        reference, R1, R2, outBAM, outBAM_stats, outBAMFILT, str(threads))
-    
-    ## Call to shell
-    os.system(bwa_call)
+    ## Run BWA script
+    subprocess.run( [ script, reference, R1, R2, outBAM, outBAM_stats, outBAMFILT, str(threads) ], stderr=subprocess.DEVNULL )
+
 
 def getConsensus(readsList, outDir):
     
