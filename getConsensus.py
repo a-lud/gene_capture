@@ -63,7 +63,7 @@ def runFastQC(readsList, outDir, rawTrim, threads):
         R2 = readsList[0][1]
 
         ## Call to FastQC at the command line
-        subprocess.call(['fastqc', '-k', '9', '-t', str(threads), '-o',
+        subprocess.run(['fastqc', '-k', '9', '-t', str(threads), '-o',
                          out, R1, R2], stderr=subprocess.DEVNULL)
     else:
         ## Getting trimmed files
@@ -73,7 +73,7 @@ def runFastQC(readsList, outDir, rawTrim, threads):
         R2 = f[1]
 
         ## Call to FastQC
-        subprocess.call(['fastqc', '-k', '9', '-t', str(threads), '-o',
+        subprocess.run(['fastqc', '-k', '9', '-t', str(threads), '-o',
                          out, R1, R2], stderr=subprocess.DEVNULL)
 
 
@@ -169,16 +169,17 @@ def getConsensus(readsList, outDir):
         bcftools call -c - | \
         bcftools norm -f '%s' -m +any -Oz -o '%s'" % (reference, bam, reference, vcf)
     os.system(bcf_call) ## Calling genotypes
-    subprocess.call(['bcftools', 'index', vcf],
-                    subprocess.DEVNULL)  # Indexing vcf file
+    subprocess.run(['bcftools', 'index', vcf],
+                    stderr=subprocess.DEVNULL)  # Indexing vcf file
 
     ## Calling consensus using VCF
-    subprocess.call(['bcftools', 'consensus', '-f',
-                     reference, '-H', '1', '-o', consensus, vcf], subprocess.DEVNULL)
+    subprocess.run(['bcftools', 'consensus', '-f',
+                     reference, '-H', '1', '-o', consensus, vcf], stderr=subprocess.DEVNULL)
 
 
-if __name__ == "__main__":
+def main():
 
+    ## Set up argument parser
     desc = str("Pipeline to assemble gene capture data using closely related references")
 
     epi = str("Developed: Alastair Ludington\n" +
