@@ -224,36 +224,59 @@ def main():
 
     args = parser.parse_args()
 
+    ## Create ouput directory for logger
+    if not os.path.exists(args.outputDir):
+        os.makedirs(args.outputDir, exist_ok=True)
+
+    ## Create logger
+    logFile = args.outputDir + '/' + 'geneCapture.log'
+    FORMAT = "%(asctime)-15s %(levelname)s %(module)s.%(name)s.%(funcName)s at %(lineno)d :\t%(message)s"
+    logger = logging.getLogger(__name__)
+    logging.basicConfig(filename=logFile, format=FORMAT, filemode='w', level=logging.DEBUG)
+
+    ## Handler to print everything to stdout
+    ch = logging.StreamHandler(sys.stdout)
+    ch.setLevel(logging.INFO)
+    logger.addHandler(ch)
+
     ## Printing arguments
     print("\n" + "*" * 80)
     print("Passed Arguments:\n")
     for arg in vars(args):
         print(arg, getattr(args, arg))
 
+    ## Running the pipeline
+
     ## Directory this script resides in
     scriptDir = os.path.dirname(os.path.realpath(__file__))
 
     print("\n" + "*" * 80)
-    print("Pipeline tasks:")
-    print("\nGetting sequence inputs (reads + references)")
+    logger.info("Getting sequence inputs (reads + references)")
     seqData = getSeqData(args.keyValuePath, args.readsDir, args.refDir)
     
-    print("\nFastQC: Raw data")
+    logger.info("FastQC: Raw data")
+    # print("\nFastQC: Raw data")
     for i in seqData:
         runFastQC(i, args.outputDir, 'raw', args.threads)
 
-    print("\nTrimmomatic: Trimming reads (adapters + quality)")
+    logger.info("Trimmomatic: Trimming reads (adapters + quality)")
     for i in seqData:
         runTrimmomatic(i, args.outputDir, args.adapterFile, args.threads)
 
-    print("\nFastQC: Trimmed data")
+    logger.info("FastQC: Trimmed data")
     for i in seqData:
         runFastQC(i, args.outputDir, 'trim', args.threads)
     
-    print("\nBWA-mem: Aligning reads")
+    logger.info("BWA-mem: Aligning reads")
     for i in seqData:
         runBWAmem(i, args.outputDir, args.threads, scriptDir)
 
-    print("\nBCFtools: Calling consensus sequence for genes")
+    logger.info("BCFtools: Calling consensus sequence for genes")
     for i in seqData:
         getConsensus(i, args.outputDir)
+
+    logger.info("GeneCapture pipeline: Complete")
+
+
+if __name__ == "__main__":
+    main()
