@@ -149,8 +149,9 @@ def runBWAmem(readsList, outDir, threads, scriptDir):
     subprocess.run( [ script, reference, R1, R2, outBAM, outBAM_stats, outBAMFILT, str(threads) ], stderr=subprocess.DEVNULL )
 
     ## Generate depth plots for each sample
+    os.chdir(outRAW)
     depth_script = scriptDir + '/plot-dist.py'
-    inFile = outRAW + '/' + readsList[2] + '.mosdepth.global.dist.txt'
+    inFile = readsList[2] + '.mosdepth.global.dist.txt'
     outFile = outPlots + '/' + readsList[2] + '.html'
     subprocess.run( [depth_script, '-o', outFile, inFile], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
