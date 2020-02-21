@@ -234,7 +234,7 @@ def main():
 
     args = parser.parse_args()
 
-    ## Create ouput directory for logger
+    ## Create output directory for logger
     if not os.path.exists(args.outputDir):
         os.makedirs(args.outputDir, exist_ok=True)
 
