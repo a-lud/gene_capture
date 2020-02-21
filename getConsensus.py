@@ -9,7 +9,7 @@ import subprocess
 import pandas as pd
 
 def checkOutputExists(outPath, ext, readsList):
-    
+
     ## List sample specific outputs
     b = os.path.basename(readsList[0][0])
     b = b.replace('_L001_R1.fastq.gz', '')
@@ -187,9 +187,7 @@ def getConsensus(readsList, outDir):
     subprocess.run(['bcftools', 'consensus', '-f',
                      reference, '-H', '1', '-o', consensus, vcf], stderr=subprocess.DEVNULL)
 
-
 def main():
-
     ## Set up argument parser
     desc = str("Pipeline to assemble gene capture data using closely related references")
 
@@ -287,7 +285,6 @@ def main():
         getConsensus(i, args.outputDir)
 
     logger.info("GeneCapture pipeline: Complete")
-
 
 if __name__ == "__main__":
     main()
