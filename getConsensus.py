@@ -116,11 +116,16 @@ def runBWAmem(readsList, outDir, threads, scriptDir):
     ## Create output directory
     outRAW = outDir + '/bwa_aligned'
     outFILT = outDir + '/bwa_aligned/filtered'
+    outPlots = outDir + '/bwa_aligned/depth_plots'
+
     if not os.path.exists(outRAW):
         os.makedirs(outRAW, exist_ok=True)
 
     if not os.path.exists(outFILT):
         os.makedirs(outFILT, exist_ok=True)
+
+    if not os.path.exists(outPlots):
+        os.makedirs(outPlots, exist_ok=True)
 
     ## Check if output exists in directory + isn't empty
     chk = checkOutputExists(outFILT, 'bam', readsList)
@@ -142,6 +147,12 @@ def runBWAmem(readsList, outDir, threads, scriptDir):
 
     ## Run BWA script
     subprocess.run( [ script, reference, R1, R2, outBAM, outBAM_stats, outBAMFILT, str(threads) ], stderr=subprocess.DEVNULL )
+
+    ## Generate depth plots for each sample
+    depth_script = scriptDir + '/plot-dist.py'
+    inFile = outRAW + '/' + readsList[2] + '.mosdepth.global.dist.txt'
+    outFile = outPlots + '/' + readsList[2] + '.html'
+    subprocess.run( [depth_script, '-o', outFile, inFile], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
 
 def getConsensus(readsList, outDir):
