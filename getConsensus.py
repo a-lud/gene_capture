@@ -269,7 +269,7 @@ def main():
     
     logger.info("BWA-mem: Aligning reads")
     for i in seqData:
-        runBWAmem(i, args.outputDir, args.threads, scriptDir)
+        runBWAmem(i, args.outputDir, args.threads, scriptDir + '/scripts')
 
     logger.info("BCFtools: Calling consensus sequence for genes")
     for i in seqData:
