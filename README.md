@@ -34,11 +34,40 @@ If all the software installs correctly, you should be met with a message demonst
 
 **NOTE**: MosDepth is only available on Linux systems! It will not install on Mac.
 
+## Preliminary data preparation
+
+### Rename fasta headers to include gene symbols
+
+It is useful to add annotations to the headers of the sequences. If you are running a transcriptome assembly pipeline such as _Trinity --> Transdecoder --> Trinotate_, it is possible
+to use an accessory script that comes with Trinity to get an annotation key-value table that maps the Trinotate annotation to the transcript in question.
+
+In the `scripts` directory is a script called `addAnno2Header.sh`. **This is an example of how to use the annotation map file** using a tool `seqkit`.
+The script cleans up the headers by removing un-needed information, then uses the 'key' in the first column of the key-value table to find a match
+in the header, replacing the match with the 'value' in the second column of the key-value table.
+
+**Important**
+
+This script is an example of how to assign annotations to fasta headers using a key-value table. **It will not work straight out of the box for your data**. It is
+extremely likely that you will need to edit the regular expressions to suit your headers.
+
+### Choosing best BLAST hits to generate a reference file
+
+After conducting a BLAST search you'll often find the same query hits multiple subjects and vice versa. This poses the problem of how to choose a best hit?
+This is essentially up to how you want to defined 'Best hit'. For example, best hit might be highest bitscore, or fewest mismatches, or a ratio of alignment
+length to number of mismatches etc...
+
+In the script directory is a script `getBestHit.R` which is one approach to selecting a best hit for each BLAST alignment. This script uses bitscore to decide best
+hits, by ordering the data by the transcript and bitscore, taking the best alignment for each transcript. These sequences are then extracted from their fasta files
+and written to a new file which can essentially be thought of as your reference file.
+
+**Again, this is an example of an approach to selecting a best BLAST hit**. There are other ways this could be done, both methodologically and programatically.
+
 ## The pipeline: getConsensus.py
 
-The pipeline has the script `getConsensus.py` which is the main script. There is also an accessory script `bwa_align.sh` which is called within the `getConsensus.py`, meaning you don't need to worry about it.
+Once you've got your reference fasta files, whether by following the approaches outlined above or by using your own method, it's time to generate consensus gene models
+for your gene capture data.
 
-The script `getConsensus.py` has the following arguments:
+The pipeline is the script `getConsensus.py` which has the following arguments:
 
 **Key-value file (-kv)**: This is a two columned CSV file that has the columns `sample` and `reference`. For each sample, match it to a **unique** basename of the reference it belongs to. Do not provide the file extension.
     -kv /path/to/key_value.csv
@@ -130,7 +159,7 @@ ${PIPELINE}/getConsensus.py \
 -af /path/to/adapters.fa \
 -j ${SLURM_CPUS_PER_TASK}
 
-conda deactivate
+source deactivate
 ```
 
 Copy the above contents into a file called `geneCapture_submission.sh`, or something similar.
