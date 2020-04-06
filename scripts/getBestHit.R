@@ -27,12 +27,6 @@ parser$add_argument("-c", "--blastColumnNames",
 ## Initialising arguments
 args <- parser$parse_args()
 
-args$blastDir <- '~/Documents/kate/2002_matt-cds/03_blast-superTranscripts'
-args$blastExt <- '.outfmt6'
-args$blastColumnNames <- c('qseqid','sseqid','pident','qlen','slen','length','qcovs','mismatch','gapopen','qstart','qend','sstart','send','evalue','bitscore')
-args$fastaDir <- '~/Documents/kate/2002_matt-cds/02_annotated-superTranscripts'
-args$fastaExt <- '.SuperTrans.anno.cds'
-
 ## Check if required packages are installed
 if(! 'BiocManager' %in% rownames(installed.packages())){install.packages("BiocManager")}
 if(! 'Biostrings' %in% rownames(installed.packages())){BiocManager::install("Biostrings")}
